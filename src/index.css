@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 34 26% 95%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 42 50% 56%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 34 26% 95%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 34 15% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 42 50% 56%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 34 20% 88%;
+    --input: 34 20% 88%;
+    --ring: 42 50% 56%;
+
+    --radius: 0.75rem;
+
+    --gold: 42 50% 56%;
+    --gold-light: 42 40% 75%;
+    --gold-dark: 42 55% 42%;
+    --beige: 34 26% 95%;
+    --beige-dark: 34 20% 88%;
+    --cream: 40 33% 97%;
+
+    --font-display: 'Cormorant Garamond', serif;
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-accent: 'Raleway', sans-serif;
+    --font-elegant: 'Playfair Display', serif;
+
+    --shadow-luxury: 0 4px 30px hsla(0, 0%, 0%, 0.06);
+    --shadow-luxury-hover: 0 8px 40px hsla(0, 0%, 0%, 0.1);
+    --shadow-glass: 0 8px 32px hsla(42, 50%, 56%, 0.08);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .text-gold-gradient {
+    background: linear-gradient(135deg, hsl(42 55% 42%), hsl(42 50% 56%), hsl(42 40% 75%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, hsl(42 55% 42%), hsl(42 50% 56%));
+  }
+
+  .bg-glass {
+    background: hsla(0, 0%, 100%, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .shadow-luxury {
+    box-shadow: var(--shadow-luxury);
+  }
+
+  .shadow-luxury-hover {
+    box-shadow: var(--shadow-luxury-hover);
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .font-body {
+    font-family: var(--font-body);
+  }
+
+  .font-accent {
+    font-family: var(--font-accent);
+  }
+
+  .font-elegant {
+    font-family: var(--font-elegant);
+  }
+}

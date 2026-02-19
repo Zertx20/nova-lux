@@ -1,0 +1,205 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const wilayas = [
+  "Adrar","Chlef","Laghouat","Oum El Bouaghi","Batna","Béjaïa","Biskra","Béchar","Blida","Bouira",
+  "Tamanrasset","Tébessa","Tlemcen","Tiaret","Tizi Ouzou","Alger","Djelfa","Jijel","Sétif","Saïda",
+  "Skikda","Sidi Bel Abbès","Annaba","Guelma","Constantine","Médéa","Mostaganem","M'Sila","Mascara",
+  "Ouargla","Oran","El Bayadh","Illizi","Bordj Bou Arréridj","Boumerdès","El Tarf","Tindouf",
+  "Tissemsilt","El Oued","Khenchela","Souk Ahras","Tipaza","Mila","Aïn Defla","Naâma","Aïn Témouchent",
+  "Ghardaïa","Relizane","Timimoun","Bordj Badji Mokhtar","Ouled Djellal","Béni Abbès","In Salah",
+  "In Guezzam","Touggourt","Djanet","El M'Ghair","El Meniaa"
+];
+
+const OrderForm = () => {
+  const [form, setForm] = useState({ 
+    nom: "", 
+    prenom: "", 
+    telephone: "", 
+    wilaya: "", 
+    adresse: "", 
+    livraison: "" 
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!form.nom.trim()) e.nom = "Champ requis";
+    if (!form.prenom.trim()) e.prenom = "Champ requis";
+    if (!form.telephone.trim() || !/^0[5-7]\d{8}$/.test(form.telephone.trim())) e.telephone = "Numéro invalide (ex: 0555123456)";
+    if (!form.wilaya) e.wilaya = "Sélectionnez une wilaya";
+    if (!form.adresse.trim()) e.adresse = "Champ requis";
+    if (!form.livraison) e.livraison = "Sélectionnez un type de livraison";
+    setErrors(e);
+    return Object.keys(e).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validate()) {
+      setSubmitted(true);
+    }
+  };
+
+  return (
+    <section id="order-form" className="py-24 px-6 bg-card">
+      <div className="max-w-lg mx-auto">
+        <motion.h2
+          className="font-display text-3xl md:text-4xl text-center text-foreground mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          Passez votre <span className="text-gold-gradient">commande</span>
+        </motion.h2>
+        <p className="font-body text-center text-muted-foreground mb-10">
+          Remplissez le formulaire ci-dessous pour recevoir votre sac Terranova.
+        </p>
+
+        <AnimatePresence mode="wait">
+          {submitted ? (
+            <motion.div
+              key="success"
+              className="bg-background rounded-3xl p-12 text-center shadow-luxury"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="text-5xl mb-4">✅</div>
+              <h3 className="font-display text-2xl text-foreground mb-2">Commande confirmée !</h3>
+              <p className="font-body text-muted-foreground">
+                Merci pour votre commande. Nous vous contacterons bientôt.
+              </p>
+            </motion.div>
+          ) : (
+            <motion.form
+              key="form"
+              onSubmit={handleSubmit}
+              className="bg-background rounded-3xl p-8 md:p-10 shadow-luxury space-y-5"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Nom</label>
+                  <input
+                    type="text"
+                    value={form.nom}
+                    onChange={(e) => setForm({ ...form, nom: e.target.value })}
+                    className="w-full font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border focus:border-primary focus:outline-none transition-colors"
+                    placeholder="Votre nom"
+                    maxLength={50}
+                  />
+                  {errors.nom && <p className="text-destructive text-xs mt-1 font-body">{errors.nom}</p>}
+                </div>
+
+                <div>
+                  <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Prénom</label>
+                  <input
+                    type="text"
+                    value={form.prenom}
+                    onChange={(e) => setForm({ ...form, prenom: e.target.value })}
+                    className="w-full font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border focus:border-primary focus:outline-none transition-colors"
+                    placeholder="Votre prénom"
+                    maxLength={50}
+                  />
+                  {errors.prenom && <p className="text-destructive text-xs mt-1 font-body">{errors.prenom}</p>}
+                </div>
+              </div>
+
+              <div>
+                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Téléphone</label>
+                <input
+                  type="tel"
+                  value={form.telephone}
+                  onChange={(e) => setForm({ ...form, telephone: e.target.value })}
+                  className="w-full font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border focus:border-primary focus:outline-none transition-colors"
+                  placeholder="0555 123 456"
+                  maxLength={10}
+                />
+                {errors.telephone && <p className="text-destructive text-xs mt-1 font-body">{errors.telephone}</p>}
+              </div>
+
+              <div>
+                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Wilaya</label>
+                <select
+                  value={form.wilaya}
+                  onChange={(e) => setForm({ ...form, wilaya: e.target.value })}
+                  className="w-full font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border focus:border-primary focus:outline-none transition-colors"
+                >
+                  <option value="">Sélectionner votre wilaya</option>
+                  {wilayas.map((w, i) => (
+                    <option key={i} value={w}>{`${i + 1} - ${w}`}</option>
+                  ))}
+                </select>
+                {errors.wilaya && <p className="text-destructive text-xs mt-1 font-body">{errors.wilaya}</p>}
+              </div>
+
+              <div>
+                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Type de livraison</label>
+                <div className="grid grid-cols-2 gap-3">
+                  <label className="relative">
+                    <input
+                      type="radio"
+                      name="livraison"
+                      value="maison"
+                      checked={form.livraison === "maison"}
+                      onChange={(e) => setForm({ ...form, livraison: e.target.value })}
+                      className="sr-only peer"
+                    />
+                    <div className="font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border cursor-pointer transition-all peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:shadow-sm flex items-center justify-center gap-2">
+                      <span>🏠</span>
+                      <span>À domicile</span>
+                    </div>
+                  </label>
+                  
+                  <label className="relative">
+                    <input
+                      type="radio"
+                      name="livraison"
+                      value="bureau"
+                      checked={form.livraison === "bureau"}
+                      onChange={(e) => setForm({ ...form, livraison: e.target.value })}
+                      className="sr-only peer"
+                    />
+                    <div className="font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border cursor-pointer transition-all peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:shadow-sm flex items-center justify-center gap-2">
+                      <span>🏢</span>
+                      <span>Au bureau</span>
+                    </div>
+                  </label>
+                </div>
+                {errors.livraison && <p className="text-destructive text-xs mt-1 font-body">{errors.livraison}</p>}
+              </div>
+
+              <div>
+                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Adresse complète</label>
+                <textarea
+                  value={form.adresse}
+                  onChange={(e) => setForm({ ...form, adresse: e.target.value })}
+                  rows={3}
+                  className="w-full font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border focus:border-primary focus:outline-none transition-colors resize-none"
+                  placeholder="Votre adresse de livraison"
+                  maxLength={300}
+                />
+                {errors.adresse && <p className="text-destructive text-xs mt-1 font-body">{errors.adresse}</p>}
+              </div>
+
+              <motion.button
+                type="submit"
+                className="w-full bg-gold-gradient text-primary-foreground font-body font-semibold text-lg py-4 rounded-full shadow-luxury hover:shadow-luxury-hover transition-all duration-300"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Valider ma commande
+              </motion.button>
+            </motion.form>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
+  );
+};
+
+export default OrderForm;

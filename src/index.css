@@ -119,4 +119,75 @@
   .font-elegant {
     font-family: var(--font-elegant);
   }
+
+  /* Mobile-optimized animations */
+  @media (max-width: 768px) {
+    .bg-card-animated {
+      background: linear-gradient(135deg, 
+        hsl(0 0% 100%) 0%, 
+        hsl(34 26% 92%) 50%, 
+        hsl(0 0% 100%) 100%);
+      background-size: 200% 200%;
+      animation: cardFloatMobile 30s ease-in-out infinite;
+    }
+    
+    .bg-subtle-shimmer::before {
+      animation: subtleShimmerMobile 12s ease-in-out infinite;
+    }
+    
+    .bg-gentle-pulse {
+      animation: gentlePulseMobile 8s ease-in-out infinite;
+    }
+  }
+
+  /* Performance-optimized keyframes for mobile */
+  @keyframes cardFloatMobile {
+    0%, 100% { 
+      background-position: 0% 50%;
+      transform: translateZ(0); /* Hardware acceleration */
+    }
+    50% { 
+      background-position: 100% 50%;
+      transform: translateZ(0);
+    }
+  }
+
+  @keyframes subtleShimmerMobile {
+    0% { 
+      transform: translateX(-100%) translateY(0) rotate(45deg);
+    }
+    100% { 
+      transform: translateX(100%) translateY(0) rotate(45deg);
+    }
+  }
+
+  @keyframes gentlePulseMobile {
+    0%, 100% { 
+      background-color: hsl(0 0% 100%);
+    }
+    50% { 
+      background-color: hsl(34 26% 92%);
+    }
+  }
+
+  /* Disable animations on low-end devices */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Optimize for better performance */
+  .bg-card-animated {
+    will-change: background-position;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+
+  .bg-subtle-shimmer::before {
+    will-change: transform;
+    backface-visibility: hidden;
+  }
 }

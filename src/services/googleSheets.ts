@@ -8,7 +8,7 @@ interface OrderData {
   timestamp: string;
 }
 
-const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbxUTToAyGNA32ExBec4TaZr72jDjO9cGHgUM55nvaGsTQHSzXiSmlq0G0KlIgvml9Fe1w/exec";
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbyC4QxhDqzMZfku1kFk_rQOn47POZ3WdMjmjHn00RM08tqCocgMXEYNWJjWBnYxSY67SQ/exec";
 
 export const sendOrderToGoogleSheets = async (orderData: OrderData): Promise<boolean> => {
   try {

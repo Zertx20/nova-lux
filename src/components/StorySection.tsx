@@ -8,7 +8,7 @@ const StorySection = () => (
         className="flex-1"
         initial={{ opacity: 0, x: -60 }}
         whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.1, margin: "-100px" }}
         transition={{ 
           duration: 0.6, 
           type: "spring" as const, 
@@ -20,7 +20,7 @@ const StorySection = () => (
           className="font-display text-3xl md:text-5xl text-foreground mb-6 leading-tight"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
           Une touche d'Italie{" "}
@@ -30,7 +30,7 @@ const StorySection = () => (
           className="font-body text-muted-foreground text-lg leading-relaxed mb-4"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.5, delay: 0.15 }}
         >
           Le sac Terranova incarne la mode italienne moderne.
@@ -42,8 +42,8 @@ const StorySection = () => (
           className="w-16 h-0.5 bg-primary mt-8" 
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true, amount: 0.1, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         />
       </motion.div>
 
@@ -51,7 +51,7 @@ const StorySection = () => (
         className="flex-1"
         initial={{ opacity: 0, x: 60 }}
         whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.1, margin: "-100px" }}
         transition={{ 
           duration: 0.6, 
           type: "spring" as const, 
@@ -63,7 +63,7 @@ const StorySection = () => (
           className="rounded-2xl overflow-hidden shadow-luxury"
           initial={{ scale: 0.9, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.6, delay: 0.2 }}
           whileHover={{ scale: 1.02 }}
         >
@@ -73,7 +73,7 @@ const StorySection = () => (
             className="w-full h-[400px] object-cover"
             initial={{ scale: 1.05 }}
             whileInView={{ scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1, margin: "-100px" }}
             transition={{ duration: 0.8 }}
             whileHover={{ scale: 1.02 }}
           />

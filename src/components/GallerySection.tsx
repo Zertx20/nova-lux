@@ -31,7 +31,7 @@ const GallerySection = () => {
           className="font-display text-3xl md:text-5xl text-center text-foreground mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
           La Collection
@@ -43,7 +43,7 @@ const GallerySection = () => {
             className="flex-1 rounded-2xl overflow-hidden shadow-luxury bg-card"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1, margin: "-100px" }}
             transition={{ duration: 0.5 }}
           >
             <motion.img
@@ -66,7 +66,7 @@ const GallerySection = () => {
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.1, margin: "-100px" }}
                 onClick={() => setSelected(i)}
                 className={`flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
                   selected === i
@@ -92,7 +92,7 @@ const GallerySection = () => {
           className="text-center mt-12"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <motion.button
@@ -102,7 +102,7 @@ const GallerySection = () => {
             whileTap={{ scale: 0.98 }}
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1, margin: "-100px" }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
             Commander Maintenant

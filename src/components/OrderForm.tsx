@@ -96,7 +96,8 @@ const OrderForm = () => {
           className="font-display text-3xl md:text-4xl text-center text-foreground mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.1, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
         >
           Passez votre <span className="text-gold-gradient">commande</span>
         </motion.h2>
@@ -126,7 +127,8 @@ const OrderForm = () => {
               className="bg-background rounded-3xl p-8 md:p-10 shadow-luxury space-y-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.1, margin: "-100px" }}
+              transition={{ duration: 0.5 }}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>

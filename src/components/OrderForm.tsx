@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { sendOrderToGoogleSheets, sendOrderEmail } from "@/services/googleSheets";
+import { sendOrderToNovaLuxSheets } from "@/services/novaLuxSheets";
 
 const wilayas = [
   "Adrar","Chlef","Laghouat","Oum El Bouaghi","Batna","Béjaïa","Biskra","Béchar","Blida","Bouira",
@@ -42,7 +42,7 @@ const OrderForm = () => {
     if (validate()) {
       setIsSubmitting(true);
       
-      // Prepare order data
+      // Prepare order data for Nova Lux Sheets
       const orderData = {
         ...form,
         timestamp: new Date().toLocaleString('fr-DZ', { 
@@ -56,37 +56,32 @@ const OrderForm = () => {
       };
 
       try {
-        console.log('📤 Starting order submission...');
+        console.log('📤 Sending order to Nova Lux Sheets...');
         
-        // Send to Google Sheets (or email as backup)
-        const sheetsSuccess = await sendOrderToGoogleSheets(orderData);
-        console.log('📊 Google Sheets result:', sheetsSuccess);
+        // Send to Nova Lux Sheets
+        const success = await sendOrderToNovaLuxSheets(orderData);
         
-        const emailSuccess = await sendOrderEmail(orderData);
-        console.log('📧 Email result:', emailSuccess);
-        
-        if (sheetsSuccess || emailSuccess) {
+        if (success) {
           setSubmitted(true);
-          console.log('✅ Order submitted successfully!');
+          console.log('✅ Order submitted to Nova Lux Sheets successfully!');
           
-          // Show success message with details
+          // Show success message with order details
           alert(`✅ Commande envoyée avec succès!\n\n` +
                 `Nom: ${orderData.nom} ${orderData.prenom}\n` +
                 `Téléphone: ${orderData.telephone}\n` +
                 `Wilaya: ${orderData.wilaya}\n` +
                 `Livraison: ${orderData.livraison}\n\n` +
-                `Nous vous contacterons bientôt.`);
+                `Votre commande a été enregistrée dans notre système Nova Lux!\n` +
+                `Nous vous contacterons bientôt pour confirmer.`);
         } else {
-          console.error('❌ Both submission methods failed');
+          console.error('❌ Failed to send order to Nova Lux Sheets');
           alert('❌ Erreur lors de l\'envoi de la commande.\n\n' +
                 'Veuillez vérifier votre connexion internet et réessayer.\n' +
                 'Si le problème persiste, contactez-nous directement.');
         }
       } catch (error) {
         console.error('❌ Submission error:', error);
-        console.error('❌ Error details:', error.message);
         alert('❌ Erreur technique lors de l\'envoi.\n\n' +
-              'Détails: ' + error.message + '\n\n' +
               'Veuillez réessayer ou nous contacter directement.');
       } finally {
         setIsSubmitting(false);

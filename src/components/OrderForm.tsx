@@ -56,19 +56,38 @@ const OrderForm = () => {
       };
 
       try {
+        console.log('📤 Starting order submission...');
+        
         // Send to Google Sheets (or email as backup)
         const sheetsSuccess = await sendOrderToGoogleSheets(orderData);
+        console.log('📊 Google Sheets result:', sheetsSuccess);
+        
         const emailSuccess = await sendOrderEmail(orderData);
+        console.log('📧 Email result:', emailSuccess);
         
         if (sheetsSuccess || emailSuccess) {
           setSubmitted(true);
-          console.log('Order submitted successfully!');
+          console.log('✅ Order submitted successfully!');
+          
+          // Show success message with details
+          alert(`✅ Commande envoyée avec succès!\n\n` +
+                `Nom: ${orderData.nom} ${orderData.prenom}\n` +
+                `Téléphone: ${orderData.telephone}\n` +
+                `Wilaya: ${orderData.wilaya}\n` +
+                `Livraison: ${orderData.livraison}\n\n` +
+                `Nous vous contacterons bientôt.`);
         } else {
-          alert('Erreur lors de l\'envoi de la commande. Veuillez réessayer.');
+          console.error('❌ Both submission methods failed');
+          alert('❌ Erreur lors de l\'envoi de la commande.\n\n' +
+                'Veuillez vérifier votre connexion internet et réessayer.\n' +
+                'Si le problème persiste, contactez-nous directement.');
         }
       } catch (error) {
-        console.error('Submission error:', error);
-        alert('Erreur lors de l\'envoi de la commande. Veuillez réessayer.');
+        console.error('❌ Submission error:', error);
+        console.error('❌ Error details:', error.message);
+        alert('❌ Erreur technique lors de l\'envoi.\n\n' +
+              'Détails: ' + error.message + '\n\n' +
+              'Veuillez réessayer ou nous contacter directement.');
       } finally {
         setIsSubmitting(false);
       }

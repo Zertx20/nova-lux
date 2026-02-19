@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { sendOrderToGoogleSheets, sendOrderEmail } from "@/services/googleSheets";
 
 const wilayas = [
   "Adrar","Chlef","Laghouat","Oum El Bouaghi","Batna","Béjaïa","Biskra","Béchar","Blida","Bouira",
@@ -22,6 +23,7 @@ const OrderForm = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -35,10 +37,41 @@ const OrderForm = () => {
     return Object.keys(e).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      setSubmitted(true);
+      setIsSubmitting(true);
+      
+      // Prepare order data
+      const orderData = {
+        ...form,
+        timestamp: new Date().toLocaleString('fr-DZ', { 
+          timeZone: 'Africa/Algiers',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit'
+        })
+      };
+
+      try {
+        // Send to Google Sheets (or email as backup)
+        const sheetsSuccess = await sendOrderToGoogleSheets(orderData);
+        const emailSuccess = await sendOrderEmail(orderData);
+        
+        if (sheetsSuccess || emailSuccess) {
+          setSubmitted(true);
+          console.log('Order submitted successfully!');
+        } else {
+          alert('Erreur lors de l\'envoi de la commande. Veuillez réessayer.');
+        }
+      } catch (error) {
+        console.error('Submission error:', error);
+        alert('Erreur lors de l\'envoi de la commande. Veuillez réessayer.');
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -188,11 +221,22 @@ const OrderForm = () => {
 
               <motion.button
                 type="submit"
-                className="w-full bg-gold-gradient text-primary-foreground font-body font-semibold text-lg py-4 rounded-full shadow-luxury hover:shadow-luxury-hover transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="w-full bg-gold-gradient text-primary-foreground font-body font-semibold text-lg py-4 rounded-full shadow-luxury hover:shadow-luxury-hover transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                disabled={isSubmitting}
               >
-                Valider ma commande
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    Envoi en cours...
+                  </span>
+                ) : (
+                  "Valider ma commande"
+                )}
               </motion.button>
             </motion.form>
           )}

@@ -27,12 +27,12 @@ const OrderForm = () => {
 
   const validate = () => {
     const e: Record<string, string> = {};
-    if (!form.nom.trim()) e.nom = "Champ requis";
-    if (!form.prenom.trim()) e.prenom = "Champ requis";
-    if (!form.telephone.trim() || !/^0[5-7]\d{8}$/.test(form.telephone.trim())) e.telephone = "Numéro invalide (ex: 0555123456)";
-    if (!form.wilaya) e.wilaya = "Sélectionnez une wilaya";
-    if (!form.adresse.trim()) e.adresse = "Champ requis";
-    if (!form.livraison) e.livraison = "Sélectionnez un type de livraison";
+    if (!form.nom.trim()) e.nom = "حقل مطلوب";
+    if (!form.prenom.trim()) e.prenom = "حقل مطلوب";
+    if (!form.telephone.trim() || !/^0[5-7]\d{8}$/.test(form.telephone.trim())) e.telephone = "رقم هاتف غير صالح (مثال: 0555123456)";
+    if (!form.wilaya) e.wilaya = "اختر ولاية";
+    if (!form.adresse.trim()) e.adresse = "حقل مطلوب";
+    if (!form.livraison) e.livraison = "اختر نوع التوصيل";
     setErrors(e);
     return Object.keys(e).length === 0;
   };
@@ -66,23 +66,23 @@ const OrderForm = () => {
           console.log('✅ Order submitted to Nova Lux Sheets successfully!');
           
           // Show success message with order details
-          alert(`✅ Commande envoyée avec succès!\n\n` +
-                `Nom: ${orderData.nom} ${orderData.prenom}\n` +
-                `Téléphone: ${orderData.telephone}\n` +
-                `Wilaya: ${orderData.wilaya}\n` +
-                `Livraison: ${orderData.livraison}\n\n` +
-                `Votre commande a été enregistrée dans notre système Nova Lux!\n` +
-                `Nous vous contacterons bientôt pour confirmer.`);
+          alert(`✅ تم إرسال طلبك بنجاح!\n\n` +
+                `الاسم: ${orderData.nom} ${orderData.prenom}\n` +
+                `الهاتف: ${orderData.telephone}\n` +
+                `الولاية: ${orderData.wilaya}\n` +
+                `التوصيل: ${orderData.livraison}\n\n` +
+                `تم تسجيل طلبك في نظام نوفا لوكس!\n` +
+                `سنتواصل معك قريباً للتأكيد.`);
         } else {
           console.error('❌ Failed to send order to Nova Lux Sheets');
-          alert('❌ Erreur lors de l\'envoi de la commande.\n\n' +
-                'Veuillez vérifier votre connexion internet et réessayer.\n' +
-                'Si le problème persiste, contactez-nous directement.');
+          alert('❌ خطأ في إرسال الطلب.\n\n' +
+                'يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.\n' +
+                'إذا استمرت المشكلة، تواصل معنا مباشرة.');
         }
       } catch (error) {
         console.error('❌ Submission error:', error);
-        alert('❌ Erreur technique lors de l\'envoi.\n\n' +
-              'Veuillez réessayer ou nous contacter directement.');
+        alert('❌ خطأ تقني أثناء الإرسال.\n\n' +
+              'يرجى المحاولة مرة أخرى أو التواصل معنا مباشرة.');
       } finally {
         setIsSubmitting(false);
       }
@@ -99,10 +99,10 @@ const OrderForm = () => {
           viewport={{ once: true, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          Passez votre <span className="text-gold-gradient">commande</span>
+          اطلب <span className="text-gold-gradient">الآن</span>
         </motion.h2>
         <p className="font-body text-center text-muted-foreground mb-10">
-          Remplissez le formulaire ci-dessous pour recevoir votre sac Terranova.
+          املأ النموذج أدناه لتلقي حقيبة تيرانوفا الخاصة بك.
         </p>
 
         <AnimatePresence mode="wait">
@@ -115,9 +115,9 @@ const OrderForm = () => {
               transition={{ duration: 0.5 }}
             >
               <div className="text-5xl mb-4">✅</div>
-              <h3 className="font-display text-2xl text-foreground mb-2">Commande confirmée !</h3>
+              <h3 className="font-display text-2xl text-foreground mb-2">تم تأكيد طلبك!</h3>
               <p className="font-body text-muted-foreground">
-                Merci pour votre commande. Nous vous contacterons bientôt.
+                شكراً لطلبك. سنتواصل معك قريباً.
               </p>
             </motion.div>
           ) : (
@@ -132,26 +132,26 @@ const OrderForm = () => {
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Nom</label>
+                  <label className="font-body text-sm font-medium text-foreground mb-1.5 block">الاسم</label>
                   <input
                     type="text"
                     value={form.nom}
                     onChange={(e) => setForm({ ...form, nom: e.target.value })}
                     className="w-full font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border focus:border-primary focus:outline-none transition-colors"
-                    placeholder="Votre nom"
+                    placeholder="اسمك"
                     maxLength={50}
                   />
                   {errors.nom && <p className="text-destructive text-xs mt-1 font-body">{errors.nom}</p>}
                 </div>
 
                 <div>
-                  <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Prénom</label>
+                  <label className="font-body text-sm font-medium text-foreground mb-1.5 block">اللقب</label>
                   <input
                     type="text"
                     value={form.prenom}
                     onChange={(e) => setForm({ ...form, prenom: e.target.value })}
                     className="w-full font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border focus:border-primary focus:outline-none transition-colors"
-                    placeholder="Votre prénom"
+                    placeholder="لقبك"
                     maxLength={50}
                   />
                   {errors.prenom && <p className="text-destructive text-xs mt-1 font-body">{errors.prenom}</p>}
@@ -159,7 +159,7 @@ const OrderForm = () => {
               </div>
 
               <div>
-                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Téléphone</label>
+                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">الهاتف</label>
                 <input
                   type="tel"
                   value={form.telephone}
@@ -172,13 +172,13 @@ const OrderForm = () => {
               </div>
 
               <div>
-                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Wilaya</label>
+                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">الولاية</label>
                 <select
                   value={form.wilaya}
                   onChange={(e) => setForm({ ...form, wilaya: e.target.value })}
                   className="w-full font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border focus:border-primary focus:outline-none transition-colors"
                 >
-                  <option value="">Sélectionner votre wilaya</option>
+                  <option value="">اختر ولايتك</option>
                   {wilayas.map((w, i) => (
                     <option key={i} value={w}>{`${i + 1} - ${w}`}</option>
                   ))}
@@ -187,7 +187,7 @@ const OrderForm = () => {
               </div>
 
               <div>
-                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Type de livraison</label>
+                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">نوع التوصيل</label>
                 <div className="grid grid-cols-2 gap-3">
                   <label className="relative">
                     <input
@@ -200,7 +200,7 @@ const OrderForm = () => {
                     />
                     <div className="font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border cursor-pointer transition-all peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:shadow-sm flex items-center justify-center gap-2">
                       <span>🏠</span>
-                      <span>À domicile</span>
+                      <span>التوصيل للمنزل</span>
                     </div>
                   </label>
                   
@@ -215,7 +215,7 @@ const OrderForm = () => {
                     />
                     <div className="font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border cursor-pointer transition-all peer-checked:border-primary peer-checked:bg-primary/10 peer-checked:shadow-sm flex items-center justify-center gap-2">
                       <span>🏢</span>
-                      <span>Au bureau</span>
+                      <span>التوصيل للمكتب</span>
                     </div>
                   </label>
                 </div>
@@ -223,13 +223,13 @@ const OrderForm = () => {
               </div>
 
               <div>
-                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">Adresse complète</label>
+                <label className="font-body text-sm font-medium text-foreground mb-1.5 block">العنوان الكامل</label>
                 <textarea
                   value={form.adresse}
                   onChange={(e) => setForm({ ...form, adresse: e.target.value })}
                   rows={3}
                   className="w-full font-body bg-secondary rounded-xl px-4 py-3 text-foreground border border-border focus:border-primary focus:outline-none transition-colors resize-none"
-                  placeholder="Votre adresse de livraison"
+                  placeholder="عنوان التوصيل الخاص بك"
                   maxLength={300}
                 />
                 {errors.adresse && <p className="text-destructive text-xs mt-1 font-body">{errors.adresse}</p>}
@@ -248,10 +248,10 @@ const OrderForm = () => {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
-                    Envoi en cours...
+                    جاري الإرسال...
                   </span>
                 ) : (
-                  "Valider ma commande"
+                  "تأكيد الطلب"
                 )}
               </motion.button>
             </motion.form>

@@ -14,8 +14,8 @@ const FinalCTA = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Améliorez votre style{" "}
-          <span className="text-gold-gradient">aujourd'hui</span>
+          حسّن أسلوبك{" "}
+          <span className="text-gold-gradient">اليوم</span>
         </motion.h2>
         <motion.p
           className="font-body text-lg text-muted-foreground mb-10"
@@ -24,7 +24,7 @@ const FinalCTA = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
-          Le luxe peut être accessible.
+          الرفاهية يمكن أن تكون في متناول الجميع.
         </motion.p>
         <motion.button
           onClick={scrollToOrder}
@@ -36,7 +36,7 @@ const FinalCTA = () => {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
         >
-          Commander le sac Terranova
+          اطلب حقيبة تيرانوفا
         </motion.button>
       </div>
     </section>

@@ -21,27 +21,27 @@ const PricingSection = () => {
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           >
-            🔥 Offre de lancement limitée
+            🔥 عرض إطلاق محدود
           </motion.div>
 
           <h2 className="font-display text-3xl md:text-4xl text-foreground mb-6">
-            Prix Exclusif
+            سعر حصري
           </h2>
 
           <div className="mb-2">
             <span className="font-body text-xl text-muted-foreground line-through">
-              2 200 DA
+              DA 2 200
             </span>
           </div>
 
           <div className="mb-8">
             <span className="font-display text-5xl md:text-6xl font-bold text-gold-gradient">
-              1 450 DA
+              DA 1 450
             </span>
           </div>
 
           <p className="font-body text-sm text-muted-foreground mb-8">
-            Paiement à la livraison disponible partout en Algérie.
+            الدفع عند الاستلام متاح في جميع أنحاء الجزائر.
           </p>
 
           <motion.button
@@ -50,7 +50,7 @@ const PricingSection = () => {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
           >
-            Commander Maintenant
+            اطلب الآن
           </motion.button>
         </motion.div>
       </div>

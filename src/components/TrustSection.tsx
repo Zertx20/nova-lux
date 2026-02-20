@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 
 const badges = [
-  { icon: "🚚", text: "Livraison rapide en Algérie" },
-  { icon: "💰", text: "Paiement à la livraison" },
-  { icon: "🔥", text: "Produit tendance 2026" },
-  { icon: "⚡", text: "Quantité limitée" },
+  { icon: "🚚", text: "توصيل سريع في جميع أنحاء الجزائر" },
+  { icon: "💰", text: "الدفع عند الاستلام" },
+  { icon: "✨", text: "جودة عالية مضمونة" },
+  { icon: "📱", text: "خدمة عملاء 24/7" },
 ];
 
 const TrustSection = () => (

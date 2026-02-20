@@ -18,7 +18,7 @@ const HeroSection = () => {
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-3xl">
         <motion.img
           src={logo}
-          alt="Nova Lux Mode"
+          alt="نوفا لوكس للموضة"
           className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover shadow-luxury mb-8"
           initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -32,8 +32,8 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1, delay: 0.3, type: "spring" as const, stiffness: 80 }}
         >
-          Élégance Italienne,{" "}
-          <span className="text-gold-gradient">Maintenant en Algérie</span>
+          أناقة إيطالية،{" "}
+          <span className="text-gold-gradient">الآن في الجزائر</span>
         </motion.h1>
 
         <motion.p
@@ -42,8 +42,20 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0, x: 0 }}
           transition={{ duration: 1, delay: 0.5, type: "spring" as const, stiffness: 60 }}
         >
-          Sac femme Terranova — tendance, pratique et élégant pour le quotidien.
+          حقيبة تيرانوفا النسائية — أناقة وعملية لكل يوم.
         </motion.p>
+
+        <motion.button
+          onClick={scrollToOrder}
+          className="bg-gold-gradient text-primary-foreground font-body font-semibold text-lg px-10 py-4 rounded-full shadow-luxury hover:shadow-luxury-hover transition-all duration-300"
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.7, type: "spring" as const, stiffness: 80 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          اطلب حقيبتك الآن
+        </motion.button>
       </div>
 
       <motion.div

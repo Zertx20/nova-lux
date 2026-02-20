@@ -6,6 +6,7 @@ import PricingSection from "@/components/PricingSection";
 import TrustSection from "@/components/TrustSection";
 import OrderForm from "@/components/OrderForm";
 import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -18,9 +19,7 @@ const Index = () => {
       <TrustSection />
       <OrderForm />
       <FinalCTA />
-      <footer className="py-8 text-center font-body text-sm text-muted-foreground border-t border-border">
-        © 2026 Nova Lux Mode — Tous droits réservés
-      </footer>
+      <Footer />
     </main>
   );
 };

@@ -25,7 +25,7 @@ const GallerySection = () => {
   };
 
   return (
-    <section className="py-24 px-6">
+    <section id="gallery" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.h2
           className="font-display text-3xl md:text-5xl text-center text-foreground mb-16"
@@ -34,7 +34,7 @@ const GallerySection = () => {
           viewport={{ once: true, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.5 }}
         >
-          La Collection
+          المجموعة
         </motion.h2>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -48,7 +48,7 @@ const GallerySection = () => {
           >
             <motion.img
               src={images[selected]}
-              alt="Terranova Bag"
+              alt="حقيبة تيرانوفا"
               className="w-full h-[400px] md:h-[550px] object-cover"
               key={selected}
               initial={{ scale: 1.02, opacity: 0 }}
@@ -105,7 +105,7 @@ const GallerySection = () => {
             viewport={{ once: true, amount: 0.1, margin: "-100px" }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
-            Commander Maintenant
+            اطلب الآن
           </motion.button>
         </motion.div>
       </div>

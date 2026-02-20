@@ -23,8 +23,8 @@ const StorySection = () => (
           viewport={{ once: true, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Une touche d'Italie{" "}
-          <span className="text-gold-gradient">dans votre quotidien</span>
+          لمسة إيطالية{" "}
+          <span className="text-gold-gradient">في حياتك اليومية</span>
         </motion.h2>
         <motion.p 
           className="font-body text-muted-foreground text-lg leading-relaxed mb-4"
@@ -33,10 +33,10 @@ const StorySection = () => (
           viewport={{ once: true, amount: 0.1, margin: "-100px" }}
           transition={{ duration: 0.5, delay: 0.15 }}
         >
-          Le sac Terranova incarne la mode italienne moderne.
-          Conçu pour les femmes actives qui recherchent élégance et praticité,
-          il accompagne parfaitement vos journées : université, travail,
-          shopping ou sorties.
+          حقيبة تيرانوفا تجسد الموضة الإيطالية العصرية.
+          مصممة للنساء النشطات اللواتي يبحثن عن الأناقة والعملية،
+          ترافقك بشكل مثالي في جميع أيامك: الجامعة، العمل،
+          التسوق أو الخروجات.
         </motion.p>
         <motion.div 
           className="w-16 h-0.5 bg-primary mt-8" 
@@ -69,7 +69,7 @@ const StorySection = () => (
         >
           <motion.img
             src={whatsapp1}
-            alt="Terranova lifestyle"
+            alt="أسلوب حياة تيرانوفا"
             className="w-full h-[400px] object-cover"
             initial={{ scale: 1.05 }}
             whileInView={{ scale: 1 }}
